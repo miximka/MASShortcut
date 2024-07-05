@@ -18,7 +18,7 @@
  Option-Shift-K by default. (Again, since Option-Shift-K inserts the Apple
  logo sign by default.)
 */
-@property(assign) BOOL allowAnyShortcutWithOptionModifier;
+@property(assign) BOOL allowAnyShortcutWithOptionModifier NS_SWIFT_UI_ACTOR;
 
 /**
  Set to `YES` if you want to accept shortcuts that override the Services menu
@@ -29,12 +29,12 @@
  find the conflicting menu item since menu items in the Services menu are not
  always visible.
 */
-@property(assign) BOOL allowOverridingServicesShortcut;
+@property(assign) BOOL allowOverridingServicesShortcut NS_SWIFT_UI_ACTOR;
 
 + (instancetype) sharedValidator;
 
-- (BOOL) isShortcutValid: (MASShortcut*) shortcut;
-- (BOOL) isShortcut: (MASShortcut*) shortcut alreadyTakenInMenu: (NSMenu*) menu explanation: (NSString**) explanation;
-- (BOOL) isShortcutAlreadyTakenBySystem: (MASShortcut*) shortcut explanation: (NSString**) explanation;
+- (BOOL) isShortcutValid: (MASShortcut*) shortcut NS_SWIFT_UI_ACTOR;
+- (BOOL) isShortcut: (MASShortcut*) shortcut alreadyTakenInMenu: (NSMenu*) menu explanation: (NSString**) explanation NS_SWIFT_UI_ACTOR;
+- (BOOL) isShortcutAlreadyTakenBySystem: (MASShortcut*) shortcut explanation: (NSString**) explanation NS_SWIFT_UI_ACTOR;
 
 @end
