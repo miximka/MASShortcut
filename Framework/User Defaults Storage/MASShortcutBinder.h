@@ -65,3 +65,6 @@
 - (void) registerDefaultShortcuts: (NSDictionary*) defaultShortcuts;
 
 @end
+
+@interface MASShortcutTransformer : NSSecureUnarchiveFromDataTransformer
+@end

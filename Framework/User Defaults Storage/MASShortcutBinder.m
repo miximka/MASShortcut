@@ -1,6 +1,14 @@
 #import "MASShortcutBinder.h"
 #import "MASShortcut.h"
 
+@implementation MASShortcutTransformer
+
++ (NSArray<Class> *)allowedTopLevelClasses {
+    return @[MASShortcut.self];
+}
+
+@end
+
 @interface MASShortcutBinder ()
 @property(strong) NSMutableDictionary *actions;
 @property(strong) NSMutableDictionary *shortcuts;
@@ -16,7 +24,7 @@
     [self setActions:[NSMutableDictionary dictionary]];
     [self setShortcuts:[NSMutableDictionary dictionary]];
     [self setShortcutMonitor:[MASShortcutMonitor sharedMonitor]];
-    [self setBindingOptions:@{NSValueTransformerNameBindingOption: NSKeyedUnarchiveFromDataTransformerName}];
+    [self setBindingOptions:@{NSValueTransformerNameBindingOption: NSStringFromClass(MASShortcutTransformer.self)}];
     return self;
 }
 

@@ -12,7 +12,7 @@ typedef NS_ENUM(NSInteger, MASShortcutViewStyle) {
     MASShortcutViewStyleRegularSquare
 };
 
-@interface MASShortcutView : NSView
+@interface MASShortcutView : NSView <NSViewToolTipOwner>
 
 @property (nonatomic, strong, nullable) MASShortcut *shortcutValue;
 @property (nonatomic, strong, nullable) MASShortcutValidator *shortcutValidator;

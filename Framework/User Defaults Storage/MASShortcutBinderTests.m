@@ -29,7 +29,8 @@ static NSString *const SampleDefaultsKey = @"sampleShortcut";
 - (void) testInitialValueReading
 {
     MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:1 modifierFlags:1];
-    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut] forKey:SampleDefaultsKey];
+    NSData *archived = [NSKeyedArchiver archivedDataWithRootObject:shortcut requiringSecureCoding:true error:nil];
+    [_defaults setObject:archived forKey:SampleDefaultsKey];
     [_binder bindShortcutWithDefaultsKey:SampleDefaultsKey toAction:^{}];
     XCTAssertTrue([_monitor isShortcutRegistered:shortcut],
         @"Pass the initial shortcut from defaults to shortcut monitor.");
@@ -39,7 +40,8 @@ static NSString *const SampleDefaultsKey = @"sampleShortcut";
 {
     MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:1 modifierFlags:1];
     [_binder bindShortcutWithDefaultsKey:SampleDefaultsKey toAction:^{}];
-    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut] forKey:SampleDefaultsKey];
+    NSData *archived = [NSKeyedArchiver archivedDataWithRootObject:shortcut requiringSecureCoding:true error:nil];
+    [_defaults setObject:archived forKey:SampleDefaultsKey];
     XCTAssertTrue([_monitor isShortcutRegistered:shortcut],
         @"Pass the shortcut from defaults to shortcut monitor after defaults change.");
 }
@@ -48,7 +50,7 @@ static NSString *const SampleDefaultsKey = @"sampleShortcut";
 {
     MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:1 modifierFlags:1];
     [_binder bindShortcutWithDefaultsKey:SampleDefaultsKey toAction:^{}];
-    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut] forKey:SampleDefaultsKey];
+    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut requiringSecureCoding:true error:nil] forKey:SampleDefaultsKey];
     [_defaults removeObjectForKey:SampleDefaultsKey];
     XCTAssertFalse([_monitor isShortcutRegistered:shortcut],
         @"Unregister shortcut from monitor after value is cleared from defaults.");
@@ -58,7 +60,7 @@ static NSString *const SampleDefaultsKey = @"sampleShortcut";
 {
     MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:1 modifierFlags:1];
     [_binder bindShortcutWithDefaultsKey:SampleDefaultsKey toAction:^{}];
-    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut] forKey:SampleDefaultsKey];
+    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut requiringSecureCoding:true error:nil] forKey:SampleDefaultsKey];
     [_binder breakBindingWithDefaultsKey:SampleDefaultsKey];
     XCTAssertFalse([_monitor isShortcutRegistered:shortcut],
         @"Unregister shortcut from monitor after binding was removed.");
@@ -67,7 +69,7 @@ static NSString *const SampleDefaultsKey = @"sampleShortcut";
 - (void) testRebinding
 {
     MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:1 modifierFlags:1];
-    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut] forKey:SampleDefaultsKey];
+    [_defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:shortcut requiringSecureCoding:true error:nil] forKey:SampleDefaultsKey];
     [_binder bindShortcutWithDefaultsKey:SampleDefaultsKey toAction:^{}];
     [_binder breakBindingWithDefaultsKey:SampleDefaultsKey];
     [_binder bindShortcutWithDefaultsKey:SampleDefaultsKey toAction:^{}];
